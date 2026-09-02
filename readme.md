@@ -6,7 +6,7 @@
 
 ชื่อ-สกุล : ธรรมสรณ์ มีเที่ยง
 
-GitHub Page URL :
+GitHub Page URL : https://thammasorn-meethiang.github.io/lab11-680610682/
 
 ---
 
