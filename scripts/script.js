@@ -1,9 +1,13 @@
 // create reference for input fields.
 const firstNameInput = document.querySelector("#first-name-input");
 const lastNameInput = document.querySelector("#last-name-input");
+const emailInput = document.querySelector("#email-input");
+const passwordInput = document.querySelector("#password-input");
+const passwordComfirmInput = document.querySelector("#password-confirm-input");
 
 // create reference for buttons.
 const submitBtn = document.querySelector("#submit-btn");
+const resetBtn = document.querySelector("#reset-btn");
 
 // simple email validation
 function validateEmail(email) {
@@ -20,28 +24,105 @@ firstNameInput.onkeyup = () => {
 
 // add callback functions for other input events.
 // (lastname, email, password, confirm password)
+lastNameInput.onkeyup = () => {
+  lastNameInput.classList.remove("is-valid");
+  lastNameInput.classList.remove("is-invalid");
+};
+
+emailInput.onkeyup = () => {
+  emailInput.classList.remove("is-valid");
+  emailInput.classList.remove("is-invalid");
+};
+
+passwordInput.onkeyup = () => {
+  passwordInput.classList.remove("is-valid");
+  passwordInput.classList.remove("is-invalid");
+};
+
+passwordComfirmInput.onkeyup = () => {
+  passwordComfirmInput.classList.remove("is-valid");
+  passwordComfirmInput.classList.remove("is-invalid");
+};
 
 // add callback function for submit button.
 submitBtn.onclick = () => {
   isFirstNameOk = false;
+  isLastNameOk = false;
+  isEmailOk = false;
+  isPasswordOk = false;
+  isPasswordComfirmOk = false;
 
   // validate first name
-  if (firstNameInput.value !== "CPE207") {
-    firstNameInput.classList.add("is-invalid");
-  } else {
+  if (firstNameInput.value !== "") {
     firstNameInput.classList.add("is-valid");
+    isFirstNameOk = true;
+  } else {
+    firstNameInput.classList.add("is-invalid");
     isFirstNameOk = true;
   }
 
   // validate last name
-
+  if (lastNameInput.value !== "") {
+    lastNameInput.classList.add("is-valid");
+    isLastNameOk = true;
+  } else {
+    lastNameInput.classList.add("is-invalid");
+  }
   // validate email
-
+  if (validateEmail(emailInput.value)) {
+    emailInput.classList.add("is-valid");
+    isEmailOk = true;
+  } else {
+    emailInput.classList.add("is-invalid");
+  }
   // validate password
-
+  if (passwordInput.value.length >= 6) {
+    passwordInput.classList.add("is-valid");
+    isPasswordOk = true;
+  } else {
+    passwordInput.classList.add("is-invalid");
+  }
   // validate confirm password
-
-  if (isFirstNameOk) alert("Registered successfully");
+  if (
+    passwordComfirmInput.value === passwordInput.value &&
+    passwordComfirmInput.value.length >= 6
+  ) {
+    passwordComfirmInput.classList.add("is-valid");
+    isPasswordComfirmOk = true;
+  } else {
+    passwordComfirmInput.classList.add("is-invalid");
+  }
+  if (
+    isFirstNameOk &&
+    isLastNameOk &&
+    isEmailOk &&
+    isPasswordOk &&
+    isPasswordComfirmOk
+  ) {
+    alert("Registered successfully");
+  }
 };
 
 // add callback function for Reset button.
+resetBtn.onclick = () => {
+  //remove first name
+  firstNameInput.value = "";
+  firstNameInput.classList.remove("is-valid");
+  firstNameInput.classList.remove("is-invalid");
+  //remove last name
+  lastNameInput.value = "";
+  lastNameInput.classList.remove("is-valid");
+  lastNameInput.classList.remove("is-invalid");
+  //remove email
+  emailInput.value = "";
+  emailInput.classList.remove("is-valid");
+  emailInput.classList.remove("is-invalid");
+  //remove password
+  passwordInput.value = "";
+  passwordInput.classList.remove("is-valid");
+  passwordInput.classList.remove("is-invalid");
+  //remove passwordcomfirm
+  passwordComfirmInput.value = "";
+  passwordComfirmInput.classList.remove("is-valid");
+  passwordComfirmInput.classList.remove("is-invalid");
+};
